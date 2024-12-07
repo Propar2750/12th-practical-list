@@ -7,13 +7,17 @@ def reshape(mat, r, c):
         for j in i:
             l.append(j)
     final = []
-    for i in range(0, r):
-        final.append([])
-        for j in range(0, c):
-            final[i].append(l[0])
-            l.pop(0)
+    if r*c == len(final):
+        for i in range(0, r):
+            final.append([])
+            for j in range(0, c):
+                final[i].append(l[0])
+                l.pop(0)
+        return final
+    else:
+        return mat
 
-    return final
+    
 
 
 r = 2
