@@ -1,13 +1,28 @@
 import pickle
 
-# Part (i): Read n dictionary objects and write them into the file
-def write_customers_to_file(n, filename="hotel.dat"):
+def write_customers_to_file_input(n, filename="hotel.dat"):
     customers = []
     for i in range(n):
         roomno = input(f"Enter room number for customer {i + 1}: ")
         name = input(f"Enter name for customer {i + 1}: ")
         duration = int(input(f"Enter duration (in days) for customer {i + 1}: "))
         customer = {"roomno": roomno, "name": name, "duration": duration}
+        customers.append(customer)
+    
+    # Open file in append mode to retain previous records
+    with open(filename, "ab") as file:
+        for customer in customers:
+            pickle.dump(customer, file)
+    print(f"\n{n} customers added to the file.")
+    
+# Part (i): Read n dictionary objects and write them into the file
+def write_customers_to_file_dictionary(dictionary, filename="hotel.dat"):
+    n=len(dictionary.keys())
+    print(dictionary.keys())
+    customers = []
+    for i in range(n):
+        
+        customer = {"roomno": dictionary[list(dictionary.keys())[i]][0], "name": dictionary[list(dictionary.keys())[i]][1], "duration": dictionary[list(dictionary.keys())[i]][2]}
         customers.append(customer)
     
     # Open file in append mode to retain previous records
@@ -58,6 +73,14 @@ def display_long_stay_customers(filename="hotel.dat"):
     except FileNotFoundError:
         print("File not found. Please add records first.")
 
+sample_customers = {
+    101: (101, "John Doe", 3),
+    102: (102, "Jane Smith", 5),
+    103: (103, "Alice Brown", 2),
+    104: (104, "Bob Johnson", 7)
+}
+write_customers_to_file_dictionary(sample_customers)
+
 # Example Usage
 if __name__ == "__main__":
     while True:
@@ -83,3 +106,56 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice. Please try again.")
+
+
+'''
+Output:
+
+4 customers added to the file.
+
+Menu:
+1. Add Customers to File
+2. Display All Customers
+3. Count Total Customers
+4. Display Customers with Stay > 2 Days
+5. Exit
+Enter your choice: 2
+
+All Customers in the File:
+{'roomno': 101, 'name': 'John Doe', 'duration': 3}
+{'roomno': 102, 'name': 'Jane Smith', 'duration': 5}
+{'roomno': 103, 'name': 'Alice Brown', 'duration': 2}
+{'roomno': 104, 'name': 'Bob Johnson', 'duration': 7}
+
+Menu:
+1. Add Customers to File
+2. Display All Customers
+3. Count Total Customers
+4. Display Customers with Stay > 2 Days
+5. Exit
+Enter your choice: 3
+
+Total number of customers in the hotel: 4
+
+Menu:
+1. Add Customers to File
+2. Display All Customers
+3. Count Total Customers
+4. Display Customers with Stay > 2 Days
+5. Exit
+Enter your choice: 4
+
+Customers who stayed more than 2 days:
+{'roomno': 101, 'name': 'John Doe', 'duration': 3}
+{'roomno': 102, 'name': 'Jane Smith', 'duration': 5}
+{'roomno': 104, 'name': 'Bob Johnson', 'duration': 7}
+
+Menu:
+1. Add Customers to File
+2. Display All Customers
+3. Count Total Customers
+4. Display Customers with Stay > 2 Days
+5. Exit
+Enter your choice: 5
+Exiting the program.
+'''
