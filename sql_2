@@ -1,0 +1,26 @@
+create database class12projects;
+use class12projects;
+create table WATCHES(Watchid varchar(4) primary key, Watch_Name varchar(20),Price int, Type varchar(20), Qty_Store int);
+insert into WATCHES values("W001","High Time",10000,"Unisex",100),
+							("W002","LifeTime",15000,"Ladies",150),
+                            ("W003","Wave",2000,"Gents",200),
+                            ("W004","High Fashion",7000,"Unisex",250),
+                            ("W005","Golden Time",2500,"Gents",100);
+create table Sales(WatchId varchar(4) references Watches(Watchid), Qty_Sold int, quarter tinyint);
+insert into Sales values("W001",10,1),
+						("W003",5,1),
+                        ("W002",20,2),
+                        ("W003",10,2),
+                        ("W001",15,3),
+                        ("W002",20,3),
+                        ("W005",10,3),
+                        ("W003",15,4);
+SELECT w.watch_name, s.Qty_sold
+FROM watches w
+JOIN sales s ON w.watchid = s.watchid
+WHERE s.quarter = 1;
+select * from watches where watch_name like "%time";   
+select Watch_Name, Qty_store from watches where type = "Unisex" ;
+select watch_name, price from watches where price > 5000 and price < 15000;  
+select w.watch_name , SUM(s.Qty_sold)  
+From watches w join sales s on w.watchid =s.watchid group by s.watchid;            
