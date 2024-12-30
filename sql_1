@@ -1,0 +1,19 @@
+create database class12projects;
+use class12projects;
+create table tutor(ID varchar(3) primary key, NAME char(20), AGE tinyint, CITY char(20), FEE int, Phone bigint);
+insert into tutor values("P1","SAMEER",34,"DELHI",45000,9811076656),
+						("P2","ARYAN",35,"NAGARKOT",54000,9911343989),
+                        ("P4","RAM",34,"CHENNAI",45000,9810593578),
+                        ("P6","PREMLATA",36,"BHOPAL",60000,9910139987),
+                        ("P7","SHIKHA",36,"RAJKOT",34000,9912139456),
+                        ("P8","RADHA",33,"DELHI",23000,8110668888);
+select * from tutor where not age > 35 and age < 40 order by age desc;
+select  AVG(FEE),city "Average","City" from tutor group by city;
+update tutor 
+set fee = 0.95 * fee 
+where ID = "P7";
+select MAX(fee),city, MIN(fee),city from tutor;
+SELECT name, city
+FROM tutor
+WHERE city LIKE '%o%' AND city NOT LIKE '%p%';
+
