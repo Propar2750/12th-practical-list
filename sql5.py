@@ -1,7 +1,7 @@
 import mysql.connector as sqltor
 
 user_database = "root"
-pwd_database = "#12tabparv"
+pwd_database = "#pwd"
 
 
 def connect_to_db():
