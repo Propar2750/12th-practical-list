@@ -12,7 +12,7 @@ select  AVG(FEE),city "Average","City" from tutor group by city;
 update tutor 
 set fee = 0.95 * fee 
 where ID = "P7";
-select MAX(fee),city, MIN(fee),city from tutor;
+select fee, city from tutor where fee =(select max(fee) from tutor) or fee =(select min(fee) from tutor);
 SELECT name, city
 FROM tutor
 WHERE city LIKE '%o%' AND city NOT LIKE '%p%';
